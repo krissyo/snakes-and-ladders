@@ -1,0 +1,4 @@
+C:\Users\Krissy\Documents\HareAndTortoise\SharedGameClasses\bin\Release\SharedGameClasses.dll
+C:\Users\Krissy\Documents\HareAndTortoise\SharedGameClasses\bin\Release\SharedGameClasses.pdb
+C:\Users\Krissy\Documents\HareAndTortoise\SharedGameClasses\obj\Release\SharedGameClasses.dll
+C:\Users\Krissy\Documents\HareAndTortoise\SharedGameClasses\obj\Release\SharedGameClasses.pdb

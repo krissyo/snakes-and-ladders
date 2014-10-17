@@ -41,15 +41,20 @@ namespace SharedGameClasses {
         /// </summary>
         public static void SetUpBoard() {
             // Create the start square
-
+            squares[0] = new Square(0, "Start");
+           
             // Create the 40 squares which make up the board
             // some of the squares will be LotteryWinSquares, 
             // others will be BadInvestmentsSquares 
-            // with most bwing just ordinary squares
+            // with most being just ordinary squares
             //
-
+            for (int i = 1; i <= 40; i++)
+            {
+                squares[i] = new Square(i,"Ordinary");
+            }
             //Create the finish square
-
+            squares[41] = new Square(41, "Finish");
+            
         } // end SetUpBoard
 
     } //end class Board

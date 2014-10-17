@@ -90,7 +90,7 @@ namespace GuiGame {
         /// Post: the boardTableLayoutPanel contains all the SquareControl objects for displaying the board.
         /// </summary>
         private void SetupGameBoard() {
-
+            
             // ########################### Code needs to be written to perform the following  ###############################################
             /*
              *   taking each Square of Baord separately create a SquareContol object containing that Square (look at the Constructor for SquareControl)
@@ -104,7 +104,7 @@ namespace GuiGame {
              *   Add the Control to the TaleLayoutPanel
              * 
              */
-
+            
         }// SetupGameBaord
 
 
@@ -114,7 +114,8 @@ namespace GuiGame {
         ///       HareAndTortoiseGame.Players BindingList is not null.
         /// Post: players DataGridView displays the correct rows and columns.
         /// </summary>
-        private void SetupPlayersDataGridView() {
+        private void SetupPlayersDataGridView()
+        {
 
             // ########################### Code needs to be written  ###############################################
 
