@@ -11,7 +11,7 @@ namespace SharedGameClasses {
 
         public const int NUMBER_OF_SQUARES = 40;  // Value doesn't include start or finish squares.
         public const int START_SQUARE_NUMBER = 0;
-        public const int FINISH_SQUARE_NUMBER = NUMBER_OF_SQUARES + 1;
+        public const int FINISH_SQUARE_NUMBER = NUMBER_OF_SQUARES-1;
 
         private static Square[] squares = new Square[NUMBER_OF_SQUARES + 2];  // The array of squares is the Board
         public static Square[] Squares {

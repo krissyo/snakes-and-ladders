@@ -140,8 +140,29 @@ namespace SharedGameClasses {
         private void Move(int numberOfSquares) {
 
             //######################### Code needs to be added here ##########################################3
-            location = Board.Squares[numberOfSquares];
+            int num = location.Number - numberOfSquares;
+            if(num < 5){
+                num = 5;
+            }
+            location = Board.Squares[num];
 
+            if (location.Name == "BadInvestmentSquare")
+            {
+                if (money >= 25)
+                {
+                   money -= 25;
+                }
+            }
+            if (location.Name == "LotteryWinSquare")
+            {
+                money += 10;
+            }
+            if (location.Name == "Finish")
+            {
+                winner = true;
+            }
+
+            
         } //end Move
 
         /// <summary>

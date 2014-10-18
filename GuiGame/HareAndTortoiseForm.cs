@@ -116,7 +116,6 @@ namespace GuiGame {
                 squarecontrol[i] = new SquareControl(Board.Squares[n], HareAndTortoiseGame.Players);
                 boardTableLayoutPanel.Controls.Add(squarecontrol[i]);
                 row++;
-                //MapSquareNumToScreenRowAndColumn(i, row, col);
                 if (col % 2 == 0)
                 {
                     n++;
@@ -154,6 +153,7 @@ namespace GuiGame {
                     col++;
                 }
             }
+            ResetGame();
         }// SetupGameBaord
 
 
@@ -184,12 +184,10 @@ namespace GuiGame {
         private void ResetGame() {
 
             // ########################### Code needs to be written  ###############################################
-            for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
-            {
-                HareAndTortoiseGame.Players[i].Location = Board.Squares[i];
-                UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
-                UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
-            }
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
+
+            HareAndTortoiseGame.SetPlayersAtTheStart();
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
         }
 
 
@@ -220,22 +218,19 @@ namespace GuiGame {
         {
 
             //##################### Code needs to be added here. ############################################################
-            if (typeOfGuiUpdate == TypeOfGuiUpdate.RemovePlayer)
+            int squarenum;
+            SquareControl sq;
+            for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
-                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
+                squarenum = GetSquareNumberOfPlayer(i);
+                sq = SquareControlAt(squarenum);
+               
+                if (typeOfGuiUpdate == TypeOfGuiUpdate.RemovePlayer)
                 {
-                    int squarenum = GetSquareNumberOfPlayer(i);
-                    SquareControl sq = SquareControlAt(squarenum);
                     sq.ContainsPlayers[i] = false;
-                    
                 }
-            }
-            else if (typeOfGuiUpdate == TypeOfGuiUpdate.AddPlayer)
-            {
-                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
+                else if (typeOfGuiUpdate == TypeOfGuiUpdate.AddPlayer)
                 {
-                    int squarenum = GetSquareNumberOfPlayer(i);
-                    SquareControl sq = SquareControlAt(squarenum);
                     sq.ContainsPlayers[i] = true;
                 }
             }
@@ -326,12 +321,22 @@ namespace GuiGame {
             // ######################## Add more code to this method and replace the next two lines by something more sensible.  ###############################
             rowNumber = 0;      // Use 0 to make the compiler happy for now.
             columnNumber = 0;   // Use 0 to make the compiler happy for now.
+            for (int i = 0; i < squareNumber; i++)
+            {
+                columnNumber++;
+                if (columnNumber == NUM_OF_COLUMNS)
+                {
+                    rowNumber++;
+                    columnNumber = 0;
+                }
+            }
+
         }//end MapSquareNumToScreenRowAndColumn
 
         /*** END OF LOW-LEVEL METHODS **********************************************/
 
-        
-        
+
+
         /*** START OF EVENT-HANDLING METHODS ***/
         // ####################### Place EVENT HANDLER Methods to this area of code  ##################################################
         /// <summary>
@@ -339,26 +344,36 @@ namespace GuiGame {
         /// Pre:  the Exit button is clicked.
         /// Post: the game is closed.
         /// </summary>
-        private void exitButton_Click(object sender, EventArgs e) {
+        private void exitButton_Click(object sender, EventArgs e)
+        {
             // Terminate immediately, rather than calling Close(), 
             // so that we don't have problems with any animations that are running at the same time.
             Environment.Exit(0);  
         }
 
-        private Die die1 = new Die(6);
-        private Die die2 = new Die(6);
+        private Die die1 = new Die(1);
+        private Die die2 = new Die(1);
 
         private void btnRollDice_Click(object sender, EventArgs e)
         {
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
             for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
                 HareAndTortoiseGame.Players[i].Play(die1, die2);
-            }
-            RefreshBoardTablePanelLayout();
+            }            
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
+            RefreshPlayersInfoInDataGridView();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ResetGame();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
+            HareAndTortoiseGame.NumberOfPlayers = int.Parse( comboBox1.SelectedItem.ToString());
             ResetGame();
         }
 

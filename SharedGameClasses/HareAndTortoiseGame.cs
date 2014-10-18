@@ -79,7 +79,6 @@ namespace SharedGameClasses {
                 
                 Player player = new Player(defaultNames[i],Board.StartSquare);
                 player.PlayerTokenColour = playerTokenColours[i];
-                player.Location = Board.Squares[5];
                 HareAndTortoiseGame.Players.Add(player);
 
             }
@@ -97,9 +96,8 @@ namespace SharedGameClasses {
             //##################### Code needs to be added here. ############################################################
             for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++)
             {
-                HareAndTortoiseGame.Players[i].Location = Board.Squares[10];
+                HareAndTortoiseGame.Players[i].Location = Board.Squares[36];
             }
-            
 
         } // end SetPlayersAtTheStart
         
