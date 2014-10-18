@@ -50,7 +50,20 @@ namespace SharedGameClasses {
             //
             for (int i = 1; i <= 40; i++)
             {
-                squares[i] = new Square(i,"Ordinary");
+
+                if (i == 40 || i == 30 || i ==20 || i == 10)
+                {
+                    squares[i] = new Square(i, "LotteryWinSquare");
+                }
+                else if (i == 35 || i == 25 || i == 15 || i == 5)
+                {
+                    squares[i] = new Square(i, "BadInvestmentSquare");
+                }
+                else
+                {
+                    squares[i] = new Square(i, "Ordinary");
+                }
+
             }
             //Create the finish square
             squares[41] = new Square(41, "Finish");

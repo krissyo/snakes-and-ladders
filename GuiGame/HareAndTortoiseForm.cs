@@ -27,7 +27,11 @@ namespace GuiGame {
         // by removing them from their old squares and adding them to their new squares.
         // This enum makes it clearer that we need to do both.
         enum TypeOfGuiUpdate { AddPlayer, RemovePlayer };
-    
+
+        private int NUMBER_OF_PLAYERS = 6;
+        //private BindingList<Player>[] players = new BindingList<Player>[6]; 
+        private BindingList<Player> Players = new BindingList<Player>();
+        //private int players = new BindingList<Player>();
         /// <summary>
         /// Constructor with initialising parameters.
         /// Pre:  none.
@@ -104,7 +108,78 @@ namespace GuiGame {
              *   Add the Control to the TaleLayoutPanel
              * 
              */
+            //Board.Squares;
+            //boardTableLayoutPanel
+            //Player[] players = new Player[6];
             
+            for (int i = 0; i <= 6; i++)
+            {
+                //players = new BindingList<Player>();
+                Player player = new Player("Player " + i,Board.Squares[0]);
+                //players[i] = player;
+                Players.Add(player);
+            }
+            int row = 0;
+            int col = 0;
+            int n = Board.Squares.Length - NUM_OF_COLUMNS ;
+            SquareControl[] squarecontrol = new SquareControl[42];
+            for (int i = Board.Squares.Length-1; i >= 0; i--)
+            {
+                //MessageBox.Show("n: " + n);
+                squarecontrol[i] = new SquareControl(Board.Squares[n], Players);
+                boardTableLayoutPanel.Controls.Add(squarecontrol[i]);
+                row++;
+                if (col % 2 == 0)
+                {
+                    n++;
+                }
+                else
+                {
+                    n--;
+                }
+                if (row > NUM_OF_COLUMNS-1)
+                {
+                    if (n == 42)
+                    {
+                        n = 35;
+                    }
+                    else if (n == 29)
+                    {
+                        n = 24;
+                    }
+                    else if (n == 30)
+                    {
+                        n = 23;
+                    }
+                    else if (n == 17)
+                    {
+                        n = 12;
+                    }
+                    else if(n==18){
+                        n = 11;
+                    }
+                    else if (n == 5)
+                    {
+                        n = 0;
+                    }
+                    row = 0;
+                    col++;
+                }
+
+
+                //MessageBox.Show("number: "+n);
+                
+                //MapSquareNumToScreenRowAndColumn(i,out row,out col);
+
+            }
+            for (int y = 0; y < NUM_OF_COLUMNS; y++)
+            {
+                for (int x = 0; x < NUM_OF_ROWS; x++)
+                {
+                    n++;
+                    //boardTableLayoutPanel.Controls.Add(squarecontrol[n]);
+                }
+            }
         }// SetupGameBaord
 
 
@@ -118,7 +193,7 @@ namespace GuiGame {
         {
 
             // ########################### Code needs to be written  ###############################################
-
+            dataGridView.DataSource = Players ;
         }
 
 
@@ -135,6 +210,12 @@ namespace GuiGame {
         private void ResetGame() {
 
             // ########################### Code needs to be written  ###############################################
+            for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+            {
+                Players[i].Location = Board.StartSquare;
+                UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
+                UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
+            }
         }
 
 
@@ -161,10 +242,27 @@ namespace GuiGame {
         /// </summary>
         /// <param name="typeOfGuiUpdate">Specifies whether all the players are being removed 
         /// from their old squares or added to their new squares</param>
-        private void UpdatePlayersGuiLocations(TypeOfGuiUpdate typeOfGuiUpdate) {
+        private void UpdatePlayersGuiLocations(TypeOfGuiUpdate typeOfGuiUpdate)
+        {
 
             //##################### Code needs to be added here. ############################################################
-
+            if (typeOfGuiUpdate == TypeOfGuiUpdate.RemovePlayer)
+            {
+                for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+                {
+                    int squarenum = GetSquareNumberOfPlayer(i);
+                    SquareControl sq = SquareControlAt(squarenum);
+                    sq.ContainsPlayers[i] = false;
+                }
+            }
+            else if (typeOfGuiUpdate == TypeOfGuiUpdate.AddPlayer)
+            {
+                for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+                {
+                    SquareControl sq = SquareControlAt(0);
+                    sq.ContainsPlayers[i] = true;
+                }
+            }
             RefreshBoardTablePanelLayout(); // Must be the last line in this method. DO NOT put it inside a loop.
         }// end UpdatePlayersGuiLocations
 
@@ -269,6 +367,18 @@ namespace GuiGame {
             // Terminate immediately, rather than calling Close(), 
             // so that we don't have problems with any animations that are running at the same time.
             Environment.Exit(0);  
+        }
+
+        private Die die1 = new Die(6);
+        private Die die2 = new Die(6);
+
+        private void btnRollDice_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
+            {
+                Players[i].Play(die1, die2);
+            }
+            
         }
 
 

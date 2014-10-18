@@ -103,6 +103,10 @@ namespace SharedGameClasses {
         public Player(String name, Square initialLocation) {
 
             //######################### Code needs to be added here ##########################################
+            this.name = name;
+            this.location = initialLocation;
+            this.money = 0;
+            this.winner = false;
 
         } // end Player constructor
 
@@ -120,6 +124,9 @@ namespace SharedGameClasses {
         public void Play(Die d1, Die d2) {
 
             //######################### Code needs to be added here ##########################################
+            int moves = d1.Roll() + d2.Roll();
+            Move(moves);
+            
 
         } // end Play.
 
@@ -133,6 +140,7 @@ namespace SharedGameClasses {
         private void Move(int numberOfSquares) {
 
             //######################### Code needs to be added here ##########################################3
+            this.location = Board.Squares[numberOfSquares];
 
         } //end Move
 

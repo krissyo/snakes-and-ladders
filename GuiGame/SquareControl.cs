@@ -75,6 +75,11 @@ namespace GuiGame {
             BorderStyle = BorderStyle.FixedSingle;
             BackColor = Color.CornflowerBlue;
 
+            if (square.Name == "Start" || square.Name == "Finish")
+            {
+                BackColor = Color.BurlyWood;
+            }
+
             LoadImageWhenNeeded();
         }
 
@@ -94,7 +99,19 @@ namespace GuiGame {
              *    else do nothing
              * 
              */
+            if (this.square.Name == "LotteryWinSquare")
+            {
+                LoadImageFromFile("Win.png");
+            }
+            if (this.square.Name == "BadInvestmentSquare")
+            {
+                textBrush = Brushes.Red;
+                LoadImageFromFile("Lose.png");
+            }
+            if (this.square.Name == "Finish")
+            {
 
+            }
         }
 
 

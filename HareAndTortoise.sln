@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedGameClasses", "SharedGameClasses\SharedGameClasses.csproj", "{1247E789-6F51-4107-9D7F-93ED61A153D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiGame", "GuiGame\GuiGame.csproj", "{A731282E-A11A-428C-A8AF-4809EE79532A}"
