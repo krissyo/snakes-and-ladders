@@ -28,9 +28,6 @@ namespace GuiGame {
         // This enum makes it clearer that we need to do both.
         enum TypeOfGuiUpdate { AddPlayer, RemovePlayer };
 
-        private int NUMBER_OF_PLAYERS = 6;
-        //private BindingList<Player>[] players = new BindingList<Player>[6]; 
-        private BindingList<Player> Players = new BindingList<Player>();
         //private int players = new BindingList<Player>();
         /// <summary>
         /// Constructor with initialising parameters.
@@ -40,8 +37,8 @@ namespace GuiGame {
         public HareAndTortoiseForm() {
             InitializeComponent();
             HareAndTortoiseGame.NumberOfPlayers = HareAndTortoiseGame.MAX_PLAYERS; // Max players, by default.
-            HareAndTortoiseGame.InitialiseAllThePlayers();
             Board.SetUpBoard();
+            HareAndTortoiseGame.InitialiseAllThePlayers();
             SetupTheGui();
             ResetGame();
         }
@@ -108,17 +105,7 @@ namespace GuiGame {
              *   Add the Control to the TaleLayoutPanel
              * 
              */
-            //Board.Squares;
-            //boardTableLayoutPanel
-            //Player[] players = new Player[6];
-            
-            for (int i = 0; i <= 6; i++)
-            {
-                //players = new BindingList<Player>();
-                Player player = new Player("Player " + i,Board.Squares[0]);
-                //players[i] = player;
-                Players.Add(player);
-            }
+            //HareAndTortoiseGame.InitialiseAllThePlayers();
             int row = 0;
             int col = 0;
             int n = Board.Squares.Length - NUM_OF_COLUMNS ;
@@ -126,9 +113,10 @@ namespace GuiGame {
             for (int i = Board.Squares.Length-1; i >= 0; i--)
             {
                 //MessageBox.Show("n: " + n);
-                squarecontrol[i] = new SquareControl(Board.Squares[n], Players);
+                squarecontrol[i] = new SquareControl(Board.Squares[n], HareAndTortoiseGame.Players);
                 boardTableLayoutPanel.Controls.Add(squarecontrol[i]);
                 row++;
+                //MapSquareNumToScreenRowAndColumn(i, row, col);
                 if (col % 2 == 0)
                 {
                     n++;
@@ -165,20 +153,6 @@ namespace GuiGame {
                     row = 0;
                     col++;
                 }
-
-
-                //MessageBox.Show("number: "+n);
-                
-                //MapSquareNumToScreenRowAndColumn(i,out row,out col);
-
-            }
-            for (int y = 0; y < NUM_OF_COLUMNS; y++)
-            {
-                for (int x = 0; x < NUM_OF_ROWS; x++)
-                {
-                    n++;
-                    //boardTableLayoutPanel.Controls.Add(squarecontrol[n]);
-                }
             }
         }// SetupGameBaord
 
@@ -193,7 +167,7 @@ namespace GuiGame {
         {
 
             // ########################### Code needs to be written  ###############################################
-            dataGridView.DataSource = Players ;
+            dataGridView.DataSource = HareAndTortoiseGame.Players;
         }
 
 
@@ -210,9 +184,9 @@ namespace GuiGame {
         private void ResetGame() {
 
             // ########################### Code needs to be written  ###############################################
-            for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+            for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
-                Players[i].Location = Board.StartSquare;
+                HareAndTortoiseGame.Players[i].Location = Board.Squares[i];
                 UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
                 UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
             }
@@ -248,18 +222,20 @@ namespace GuiGame {
             //##################### Code needs to be added here. ############################################################
             if (typeOfGuiUpdate == TypeOfGuiUpdate.RemovePlayer)
             {
-                for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
                 {
                     int squarenum = GetSquareNumberOfPlayer(i);
                     SquareControl sq = SquareControlAt(squarenum);
                     sq.ContainsPlayers[i] = false;
+                    
                 }
             }
             else if (typeOfGuiUpdate == TypeOfGuiUpdate.AddPlayer)
             {
-                for (int i = 0; i <= NUMBER_OF_PLAYERS; i++)
+                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
                 {
-                    SquareControl sq = SquareControlAt(0);
+                    int squarenum = GetSquareNumberOfPlayer(i);
+                    SquareControl sq = SquareControlAt(squarenum);
                     sq.ContainsPlayers[i] = true;
                 }
             }
@@ -374,11 +350,16 @@ namespace GuiGame {
 
         private void btnRollDice_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < NUMBER_OF_PLAYERS; i++)
+            for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
-                Players[i].Play(die1, die2);
+                HareAndTortoiseGame.Players[i].Play(die1, die2);
             }
-            
+            RefreshBoardTablePanelLayout();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ResetGame();
         }
 
 

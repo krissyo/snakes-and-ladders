@@ -140,7 +140,7 @@ namespace SharedGameClasses {
         private void Move(int numberOfSquares) {
 
             //######################### Code needs to be added here ##########################################3
-            this.location = Board.Squares[numberOfSquares];
+            location = Board.Squares[numberOfSquares];
 
         } //end Move
 

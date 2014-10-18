@@ -41,7 +41,7 @@ namespace SharedGameClasses {
         /// </summary>
         public static void SetUpBoard() {
             // Create the start square
-            squares[0] = new Square(0, "Start");
+            Board.squares[0] = new Square(0, "Start");
            
             // Create the 40 squares which make up the board
             // some of the squares will be LotteryWinSquares, 
@@ -53,15 +53,18 @@ namespace SharedGameClasses {
 
                 if (i == 40 || i == 30 || i ==20 || i == 10)
                 {
-                    squares[i] = new Square(i, "LotteryWinSquare");
+                    Board.squares[i] = new Square(i, "LotteryWinSquare");
+                    
                 }
                 else if (i == 35 || i == 25 || i == 15 || i == 5)
                 {
-                    squares[i] = new Square(i, "BadInvestmentSquare");
+                    Board.squares[i] = new Square(i, "BadInvestmentSquare");
+                    
                 }
                 else
                 {
                     squares[i] = new Square(i, "Ordinary");
+                    
                 }
 
             }

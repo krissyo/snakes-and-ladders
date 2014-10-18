@@ -101,6 +101,7 @@ namespace GuiGame {
              */
             if (this.square.Name == "LotteryWinSquare")
             {
+                textBrush = Brushes.Black;
                 LoadImageFromFile("Win.png");
             }
             if (this.square.Name == "BadInvestmentSquare")
