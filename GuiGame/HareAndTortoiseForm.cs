@@ -112,8 +112,8 @@ namespace GuiGame {
             SquareControl[] squarecontrol = new SquareControl[42];
             for (int i = Board.Squares.Length-1; i >= 0; i--)
             {
-                //MessageBox.Show("n: " + n);
                 squarecontrol[i] = new SquareControl(Board.Squares[n], HareAndTortoiseGame.Players);
+                Board.Squares[i].Location = n;
                 boardTableLayoutPanel.Controls.Add(squarecontrol[i]);
                 row++;
                 if (col % 2 == 0)
@@ -362,7 +362,6 @@ namespace GuiGame {
                 HareAndTortoiseGame.Players[i].Play(die1, die2);
             }            
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
-            RefreshPlayersInfoInDataGridView();
         }
 
         private void button1_Click(object sender, EventArgs e)

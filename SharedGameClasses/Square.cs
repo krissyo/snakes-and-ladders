@@ -18,7 +18,18 @@ namespace SharedGameClasses {
                 return number;
             }
         }
-
+        private int location;
+        public int Location
+        {
+            get
+            {
+                return location;
+            }
+            set
+            {
+                location = value;
+            }
+        }
         // The name of this square. 
         // This is the ‘type’ of square it is: Ordinary, Start, Finish, Lottery Win or Bad Investment.
         private string name;
