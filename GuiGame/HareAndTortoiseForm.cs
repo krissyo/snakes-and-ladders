@@ -185,8 +185,8 @@ namespace GuiGame {
 
             // ########################### Code needs to be written  ###############################################
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
-
             HareAndTortoiseGame.SetPlayersAtTheStart();
+            groupBox1.Visible = true;
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
         }
 
@@ -362,6 +362,7 @@ namespace GuiGame {
                 HareAndTortoiseGame.Players[i].Play(die1, die2);
             }            
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
+            RefreshPlayersInfoInDataGridView();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -376,6 +377,42 @@ namespace GuiGame {
             ResetGame();
         }
 
+        public int current_player = 0;
+        private void btnNextRoll_Click(object sender, EventArgs e)
+        {
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
+            HareAndTortoiseGame.Players[current_player].Play(die1, die2);
+            current_player++;
+            if (current_player >= HareAndTortoiseGame.NumberOfPlayers)
+            {
+                current_player = 0;
+            }
+            UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
+            RefreshPlayersInfoInDataGridView();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            btnRollDice.Enabled = false;
+            btnNextRoll.Enabled = true;
+
+            ResetGame();
+            groupBox1.Visible = false;
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            btnRollDice.Enabled = true;
+            btnNextRoll.Enabled = false;
+
+            ResetGame();
+            groupBox1.Visible = false;
+        }
+
+        private void splitContainer_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
 
 

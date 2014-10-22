@@ -27,11 +27,9 @@
             this.boardTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRollDice = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnNextRoll = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -39,12 +37,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -59,19 +58,17 @@
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer.Panel2.Controls.Add(this.button1);
             this.splitContainer.Panel2.Controls.Add(this.btnRollDice);
-            this.splitContainer.Panel2.Controls.Add(this.label4);
             this.splitContainer.Panel2.Controls.Add(this.btnNextRoll);
-            this.splitContainer.Panel2.Controls.Add(this.radioButton2);
-            this.splitContainer.Panel2.Controls.Add(this.radioButton1);
-            this.splitContainer.Panel2.Controls.Add(this.dataGridView2);
             this.splitContainer.Panel2.Controls.Add(this.dataGridView);
             this.splitContainer.Panel2.Controls.Add(this.label3);
             this.splitContainer.Panel2.Controls.Add(this.comboBox1);
             this.splitContainer.Panel2.Controls.Add(this.label2);
             this.splitContainer.Panel2.Controls.Add(this.label1);
             this.splitContainer.Panel2.Controls.Add(this.exitButton);
+            this.splitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_Panel2_Paint);
             this.splitContainer.Size = new System.Drawing.Size(884, 664);
             this.splitContainer.SplitterDistance = 668;
             this.splitContainer.TabIndex = 3;
@@ -103,7 +100,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(26, 629);
+            this.button1.Location = new System.Drawing.Point(66, 600);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -113,6 +110,7 @@
             // 
             // btnRollDice
             // 
+            this.btnRollDice.Enabled = false;
             this.btnRollDice.Location = new System.Drawing.Point(66, 540);
             this.btnRollDice.Name = "btnRollDice";
             this.btnRollDice.Size = new System.Drawing.Size(75, 23);
@@ -120,16 +118,6 @@
             this.btnRollDice.Text = "Roll dice";
             this.btnRollDice.UseVisualStyleBackColor = true;
             this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.Location = new System.Drawing.Point(66, 354);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Single Step";
             // 
             // btnNextRoll
             // 
@@ -140,38 +128,33 @@
             this.btnNextRoll.TabIndex = 11;
             this.btnNextRoll.Text = "Click next player\'s roll";
             this.btnNextRoll.UseVisualStyleBackColor = true;
+            this.btnNextRoll.Click += new System.EventHandler(this.btnNextRoll_Click);
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.radioButton2.Location = new System.Drawing.Point(58, 393);
+            this.radioButton2.BackColor = System.Drawing.SystemColors.Control;
+            this.radioButton2.Location = new System.Drawing.Point(13, 40);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(39, 17);
             this.radioButton2.TabIndex = 10;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "No";
             this.radioButton2.UseVisualStyleBackColor = false;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged_1);
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.radioButton1.Location = new System.Drawing.Point(58, 370);
+            this.radioButton1.BackColor = System.Drawing.SystemColors.Control;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(13, 19);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(43, 17);
             this.radioButton1.TabIndex = 9;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Yes";
             this.radioButton1.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(45, 354);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(120, 72);
-            this.dataGridView2.TabIndex = 8;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // dataGridView
             // 
@@ -231,13 +214,24 @@
             // exitButton
             // 
             this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.Location = new System.Drawing.Point(110, 629);
+            this.exitButton.Location = new System.Drawing.Point(66, 629);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Location = new System.Drawing.Point(26, 333);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(154, 82);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Single Step";
             // 
             // HareAndTortoiseForm
             // 
@@ -253,8 +247,9 @@
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -272,11 +267,10 @@
         private System.Windows.Forms.Button btnNextRoll;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button btnRollDice;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

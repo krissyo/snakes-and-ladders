@@ -100,13 +100,5 @@ namespace SharedGameClasses {
             }
 
         } // end SetPlayersAtTheStart
-        
-
-
-
-
-
-
-
     } //end class HareAndTortoiseGame
 }

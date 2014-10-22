@@ -125,7 +125,7 @@ namespace SharedGameClasses {
 
             //######################### Code needs to be added here ##########################################
             int moves = d1.Roll() + d2.Roll();
-            Move(moves);
+            Move(1);
             
 
         } // end Play.
@@ -152,18 +152,18 @@ namespace SharedGameClasses {
             location = Board.Squares[Board.Squares[num].Location];
             //location = Board.Squares[num];
 
-            if (location.Name == "BadInvestmentSquare")
+            if (num == 5 || num == 15 || num == 25 || num == 25)
             {
                 if (money >= 25)
                 {
-                   money -= 25;
+                    Debit(25);
                 }
             }
-            if (location.Name == "LotteryWinSquare")
+            if (num == 10 || num == 20 || num == 30 || num == 40)
             {
-                money += 10;
+                Credit(10);
             }
-            if (location.Name == "Finish")
+            if (num==  0)
             {
                 winner = true;
             }
@@ -196,7 +196,7 @@ namespace SharedGameClasses {
         public void Debit(int amount) {
 
             //######################### Code needs to be added here ##########################################3
-
+            Money = Money - amount;
         } //end Debit
 
         
