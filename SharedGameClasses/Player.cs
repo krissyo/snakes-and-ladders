@@ -152,14 +152,14 @@ namespace SharedGameClasses {
             location = Board.Squares[Board.Squares[num].Location];
             //location = Board.Squares[num];
 
-            if (num == 5 || num == 15 || num == 25 || num == 25)
+            if (num == 6 || num == 16 || num == 26 || num == 36)
             {
                 if (money >= 25)
                 {
                     Debit(25);
                 }
             }
-            if (num == 10 || num == 20 || num == 30 || num == 40)
+            if (num == 1 || num == 11 || num == 21 || num == 31)
             {
                 Credit(10);
             }
