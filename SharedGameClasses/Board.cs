@@ -47,15 +47,16 @@ namespace SharedGameClasses {
             // some of the squares will be LotteryWinSquares, 
             // others will be BadInvestmentsSquares 
             // with most being just ordinary squares
-            //
+            // Count from 40 down to 0
             for (int i = 1; i <= 40; i++)
             {
-
+                // Winner squares
                 if (i == 40 || i == 30 || i ==20 || i == 10)
                 {
                     Board.squares[i] = new Square(i, "LotteryWinSquare");
                     
                 }
+                // Lose squares
                 else if (i == 35 || i == 25 || i == 15 || i == 5)
                 {
                     Board.squares[i] = new Square(i, "BadInvestmentSquare");

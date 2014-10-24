@@ -19,9 +19,11 @@ namespace GuiGame {
     /// </summary>
     public partial class HareAndTortoiseForm : Form {
 
-        // Specify the numbers of rows and columns on the screen.
+        // Specify the numbers of rows and columns on the screen
         const int NUM_OF_ROWS = 7;
         const int NUM_OF_COLUMNS = 6;
+        // current player in the roll loop
+        private int current_player = 0;
 
         // When we update what's on the screen, we show the movement of players 
         // by removing them from their old squares and adding them to their new squares.
@@ -112,9 +114,14 @@ namespace GuiGame {
             SquareControl[] squarecontrol = new SquareControl[42];
             for (int i = Board.Squares.Length-1; i >= 0; i--)
             {
+                // making a new square control to display the squares
                 squarecontrol[i] = new SquareControl(Board.Squares[n], HareAndTortoiseGame.Players);
+                // setting the current squares location
                 Board.Squares[i].Location = n;
+
+                // adding square control to layout panel 
                 boardTableLayoutPanel.Controls.Add(squarecontrol[i]);
+                // calculate n which is the location of the square
                 row++;
                 if (col % 2 == 0)
                 {
@@ -166,7 +173,7 @@ namespace GuiGame {
         private void SetupPlayersDataGridView()
         {
 
-            // ########################### Code needs to be written  ###############################################
+            // binding player class to data grid
             dataGridView.DataSource = HareAndTortoiseGame.Players;
         }
 
@@ -183,10 +190,14 @@ namespace GuiGame {
         /// </summary>
         private void ResetGame() {
 
-            // ########################### Code needs to be written  ###############################################
+            // removes players from the board
+            ResetPlayersInfoInDataGridView();
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
+            // places players location at the start of the board
             HareAndTortoiseGame.SetPlayersAtTheStart();
+            // resets game controls
             groupBox1.Visible = true;
+            // adds all players the board
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
         }
 
@@ -217,18 +228,20 @@ namespace GuiGame {
         private void UpdatePlayersGuiLocations(TypeOfGuiUpdate typeOfGuiUpdate)
         {
 
-            //##################### Code needs to be added here. ############################################################
+            // stores current square player is in
             int squarenum;
             SquareControl sq;
             for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
                 squarenum = GetSquareNumberOfPlayer(i);
                 sq = SquareControlAt(squarenum);
-               
+                
+                // remove player from SquareControl
                 if (typeOfGuiUpdate == TypeOfGuiUpdate.RemovePlayer)
                 {
                     sq.ContainsPlayers[i] = false;
                 }
+                // adds player to SquareControl
                 else if (typeOfGuiUpdate == TypeOfGuiUpdate.AddPlayer)
                 {
                     sq.ContainsPlayers[i] = true;
@@ -274,6 +287,21 @@ namespace GuiGame {
             HareAndTortoiseGame.Players.ResetBindings();
         } //end RefreshPlayersInfoInDataGridView
 
+        /// <summary>
+        /// When the game ends, the data in the view needs to all reset back
+        /// to 0
+        /// Pre:  none.
+        /// Post: the players DataGridView shows reset stats.
+        /// </summary>
+        private void ResetPlayersInfoInDataGridView()
+        {
+            for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
+            {
+                HareAndTortoiseGame.Players[i].Money = 0;
+                HareAndTortoiseGame.Players[i].Winner = false;
+            }
+            RefreshPlayersInfoInDataGridView();
+        } //end ResetPlayersInfoInDataGridView
 
         /// <summary>
         /// Tells you the current square number that a given player is on.
@@ -282,7 +310,8 @@ namespace GuiGame {
         /// </summary>
         /// <param name="playerNumber">The player number.</param>
         /// <returns>Returns the square number of the playerNumber.</returns>
-        private int GetSquareNumberOfPlayer(int playerNumber) {
+        private int GetSquareNumberOfPlayer(int playerNumber)
+        {
             Square playerSquare = HareAndTortoiseGame.Players[playerNumber].Location;
             return playerSquare.Number;
         } //end GetSquareNumberOfPlayer
@@ -354,22 +383,28 @@ namespace GuiGame {
         private Die die1 = new Die(1);
         private Die die2 = new Die(1);
 
+        // handles the button click of Roll Dice
         private void btnRollDice_Click(object sender, EventArgs e)
         {
+            // removes all players from the board
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
             for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
                 HareAndTortoiseGame.Players[i].Play(die1, die2);
-            }            
+            } 
+            // adds all players back to the board
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
+            // updates the data grid view
             RefreshPlayersInfoInDataGridView();
         }
-
+        
+        // handles the button click of Reset Game 
         private void button1_Click(object sender, EventArgs e)
         {
             ResetGame();
         }
 
+        // handles the drop down and selection of the number of players 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
@@ -377,20 +412,24 @@ namespace GuiGame {
             ResetGame();
         }
 
-        public int current_player = 0;
+        // handles the button click of Click Next Player's Roll 
         private void btnNextRoll_Click(object sender, EventArgs e)
         {
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.RemovePlayer);
             HareAndTortoiseGame.Players[current_player].Play(die1, die2);
+            // goes to the next players turn
             current_player++;
+            // goes to the first players turn 
             if (current_player >= HareAndTortoiseGame.NumberOfPlayers)
             {
                 current_player = 0;
             }
+            // after a roll this updates the players location on the board
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
             RefreshPlayersInfoInDataGridView();
         }
-
+        
+        // handles the Single Step radio button: Yes
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             btnRollDice.Enabled = false;
@@ -400,6 +439,7 @@ namespace GuiGame {
             groupBox1.Visible = false;
         }
 
+        // handles the Single Step radio button: No
         private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
         {
             btnRollDice.Enabled = true;

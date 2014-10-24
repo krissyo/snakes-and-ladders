@@ -125,7 +125,7 @@ namespace SharedGameClasses {
 
             //######################### Code needs to be added here ##########################################
             int moves = d1.Roll() + d2.Roll();
-            Move(1);
+            Move(moves);
             
 
         } // end Play.

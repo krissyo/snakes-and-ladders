@@ -72,13 +72,14 @@ namespace SharedGameClasses {
         /// Post: all the game's players are initialised.
         /// </summary>
         public static void InitialiseAllThePlayers() {
-
-            //##################### Code needs to be added here. ############################################################
+ 
             for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++)
             {
                 
+                // creating a player and assigning a value
                 Player player = new Player(defaultNames[i],Board.StartSquare);
                 player.PlayerTokenColour = playerTokenColours[i];
+                // adds player to list of players
                 HareAndTortoiseGame.Players.Add(player);
 
             }
@@ -93,7 +94,6 @@ namespace SharedGameClasses {
         public static void SetPlayersAtTheStart()
         {
 
-            //##################### Code needs to be added here. ############################################################
             for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++)
             {
                 HareAndTortoiseGame.Players[i].Location = Board.Squares[36];
