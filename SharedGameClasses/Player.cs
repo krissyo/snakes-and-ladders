@@ -12,7 +12,7 @@ namespace SharedGameClasses {
     /// </summary>
     public class Player {
 
-        private const int INITIAL_AMOUNT = 100;
+        private const int INITIAL_AMOUNT = 100; 
 
         // name of the player
         private string name;
@@ -105,7 +105,7 @@ namespace SharedGameClasses {
             //######################### Code needs to be added here ##########################################
             this.name = name;
             this.location = initialLocation;
-            this.money = 0;
+            this.money = 100;
             this.winner = false;
 
         } // end Player constructor
@@ -163,12 +163,7 @@ namespace SharedGameClasses {
             {
                 Credit(10);
             }
-            if (num==  0)
-            {
-                winner = true;
-            }
-
-            
+            checkForWinner();
         } //end Move
 
         /// <summary>
@@ -199,6 +194,45 @@ namespace SharedGameClasses {
             Money = Money - amount;
         } //end Debit
 
-        
+        /// <summary>
+        /// Checks each turn to see if all the players are at the end
+        ///     and then check each players score to determine the winner
+        /// Pre:  all players are at the end
+        /// Post: one or more winners ticks are checked
+        /// </summary>
+        private void checkForWinner()
+        {
+            int highest_score = 0;
+            int score = 0;
+            int players_done = 0;
+            for (int f = 0; f < HareAndTortoiseGame.NumberOfPlayers; f++)
+            {
+                if (HareAndTortoiseGame.Players[f].location == Board.Squares[5])
+                {
+                    players_done++;
+                }
+            }
+            if (players_done == HareAndTortoiseGame.NumberOfPlayers)
+            {
+                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
+                {
+                    if (HareAndTortoiseGame.Players[i].location == Board.Squares[5])
+                    {
+                        score = HareAndTortoiseGame.Players[i].money;
+                        if (score > highest_score)
+                        {
+                            highest_score = score;
+                        }
+                    }
+                }
+                for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
+                {
+                    if (HareAndTortoiseGame.Players[i].money == highest_score)
+                    {
+                        HareAndTortoiseGame.Players[i].winner = true;
+                    }
+                }
+            }
+        }
     } //end class Player
 }

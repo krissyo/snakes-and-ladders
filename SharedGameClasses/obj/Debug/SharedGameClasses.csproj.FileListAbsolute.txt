@@ -28,3 +28,8 @@ C:\Users\Krissy\Documents\HareAndTortoise~\SharedGameClasses\bin\Debug\SharedGam
 C:\Users\Krissy\Documents\HareAndTortoise~\SharedGameClasses\obj\Debug\SharedGameClasses.csprojResolveAssemblyReference.cache
 C:\Users\Krissy\Documents\HareAndTortoise~\SharedGameClasses\obj\Debug\SharedGameClasses.dll
 C:\Users\Krissy\Documents\HareAndTortoise~\SharedGameClasses\obj\Debug\SharedGameClasses.pdb
+C:\Users\Krissy\Documents\HareAndShitty\cab202_final_assignment\SharedGameClasses\bin\Debug\SharedGameClasses.dll
+C:\Users\Krissy\Documents\HareAndShitty\cab202_final_assignment\SharedGameClasses\bin\Debug\SharedGameClasses.pdb
+C:\Users\Krissy\Documents\HareAndShitty\cab202_final_assignment\SharedGameClasses\obj\Debug\SharedGameClasses.csprojResolveAssemblyReference.cache
+C:\Users\Krissy\Documents\HareAndShitty\cab202_final_assignment\SharedGameClasses\obj\Debug\SharedGameClasses.dll
+C:\Users\Krissy\Documents\HareAndShitty\cab202_final_assignment\SharedGameClasses\obj\Debug\SharedGameClasses.pdb

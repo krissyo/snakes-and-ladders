@@ -10,6 +10,8 @@ using System.ComponentModel;  // for BindingList.
 namespace SharedGameClasses {
     /// <summary>
     /// Plays a game called Hare and the Tortoise
+    /// Name: Krissy O'Farrell and Harvey Meale
+    /// Student numbers: 08854114 and 08888817
     /// </summary>
     public static class HareAndTortoiseGame {
         
@@ -73,8 +75,7 @@ namespace SharedGameClasses {
         /// </summary>
         public static void InitialiseAllThePlayers() {
  
-            for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++)
-            {
+            for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++){
                 
                 // creating a player and assigning a value
                 Player player = new Player(defaultNames[i],Board.StartSquare);
@@ -91,13 +92,11 @@ namespace SharedGameClasses {
         /// Pre:  none.
         /// Post: the game is reset as though it is being played for the first time.
         /// </summary>
-        public static void SetPlayersAtTheStart()
-        {
+        public static void SetPlayersAtTheStart(){
 
-            for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++)
-            {
+            for (int i = 0; i < HareAndTortoiseGame.numberOfPlayers; i++){
                 HareAndTortoiseGame.Players[i].Location = Board.Squares[36];
-            }
+            } 
 
         } // end SetPlayersAtTheStart
     } //end class HareAndTortoiseGame

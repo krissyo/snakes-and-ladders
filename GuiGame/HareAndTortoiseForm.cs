@@ -172,7 +172,7 @@ namespace GuiGame {
         /// </summary>
         private void SetupPlayersDataGridView()
         {
-
+            dataGridView.AutoGenerateColumns = false;
             // binding player class to data grid
             dataGridView.DataSource = HareAndTortoiseGame.Players;
         }
@@ -197,6 +197,7 @@ namespace GuiGame {
             HareAndTortoiseGame.SetPlayersAtTheStart();
             // resets game controls
             groupBox1.Visible = true;
+            
             // adds all players the board
             UpdatePlayersGuiLocations(TypeOfGuiUpdate.AddPlayer);
         }
@@ -297,7 +298,7 @@ namespace GuiGame {
         {
             for (int i = 0; i < HareAndTortoiseGame.NumberOfPlayers; i++)
             {
-                HareAndTortoiseGame.Players[i].Money = 0;
+                HareAndTortoiseGame.Players[i].Money = 100;
                 HareAndTortoiseGame.Players[i].Winner = false;
             }
             RefreshPlayersInfoInDataGridView();
